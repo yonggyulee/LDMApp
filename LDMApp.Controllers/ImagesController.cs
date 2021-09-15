@@ -1,4 +1,5 @@
-﻿using LDMApp.Services.Interfaces;
+﻿using LDMApp.Core.Models;
+using LDMApp.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,9 @@ namespace LDMApp.Controllers
         }
 
         [HttpGet("/{dataset_id}")]
-        public async Task<string> Get(string dataset_id)
+        public async Task<ICollection<Image>> Get(string dataset_id)
         {
-            return await imagesApi.Get(dataset_id);
+            return await imagesApi.GetList(dataset_id);
         }
     }
 }

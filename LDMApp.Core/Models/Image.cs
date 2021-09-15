@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace LDMApp.Core.Models
 {
-    class Image
+    public class Image
     {
         [JsonPropertyName("imageID")]
         public string ImageID { get; set; }
@@ -24,5 +24,10 @@ namespace LDMApp.Core.Models
 
         [JsonPropertyName("imageScheme")]
         public string ImageScheme { get; set; }
+
+        public override string ToString()
+        {
+            return $"Image: ({ImageID}, {SampleID}, {ImageNO}, {ImageCode}, {OriginalFilename}, {ImageScheme})";
+        }
     }
 }

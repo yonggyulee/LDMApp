@@ -18,7 +18,7 @@ namespace LDMApp.Controllers
         }
 
         [HttpGet("/")]
-        public async Task<string> Get()
+        public async Task<ICollection<string>> Get()
         {
             return await datasetApi.Get();
         }

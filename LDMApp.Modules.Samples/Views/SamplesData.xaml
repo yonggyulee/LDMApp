@@ -23,4 +23,10 @@
             </GridView>
         </ListView.View>
     </ListView>
+    <!--<StackPanel Orientation="Vertical">
+        <TextBlock Text="Test"/>
+        <TextBlock Text="{Binding Message}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" /> 
+    </StackPanel>-->
 </UserControl>

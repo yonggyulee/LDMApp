@@ -10,6 +10,9 @@ namespace LDMApp.Services.Interfaces
     public interface IDatasetApi
     {
         [Get("/")]
-        Task<string> Get();
+        Task<ICollection<string>> Get();
+
+        [Get("/create_dataset={id}")]
+        Task<string> Create(string id);
     }
 }

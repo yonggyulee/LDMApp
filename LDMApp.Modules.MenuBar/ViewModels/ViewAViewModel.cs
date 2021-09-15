@@ -33,7 +33,7 @@ namespace LDMApp.Modules.MenuBar.ViewModels
             try
             {
                 var result = await datasetController.Get();
-                if (result != null) Message = result;
+                //if (result != null) Message = result;
             }
             catch (Exception e)
             {
