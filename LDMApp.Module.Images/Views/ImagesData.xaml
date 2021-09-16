@@ -11,6 +11,9 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0">
+                        
+                    </StackPanel>
                     
                 </Grid>
             </Border>
@@ -18,9 +21,10 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Images" Grid.Row="0"/>
+        <Label Content="Images" Grid.Row="0"/>
+        
     </Grid>
 </UserControl>
