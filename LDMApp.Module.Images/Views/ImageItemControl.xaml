@@ -17,7 +17,7 @@
             </StackPanel>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="0.5*"/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -27,11 +27,11 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-                    <Label Content="Image Info" FontSize="10"/>
+                    <Label Content="Image Info" FontSize="15"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="0" Grid.RowSpan="7" Background="LightGray"/>
                 <Label Content="IMAGE__ID" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
