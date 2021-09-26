@@ -20,9 +20,9 @@ namespace LDMApp.Services.Interfaces
         Task<Sample> Post(string dataset_id, [Body] Sample sample);
 
         [Delete("/{dataset_id}/{id}")]
-        Task<string> Delete(string dataset_id, string id);
+        Task<string> Delete(string dataset_id, int id);
 
         [Put("/{dataset_id}/{id}")]
-        Task<string> Put(string dataset_id, string id, [Body] Sample sample);       
+        Task<string> Put(string dataset_id, string id, [Body] Sample sample);
     }
 }

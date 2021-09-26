@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <ListView BorderThickness="0" Width="Auto"
+    <ListView BorderThickness="1" Width="Auto"
               ItemsSource="{Binding Path=SampleItems}"
               SelectedItem="{Binding Path=CurrentPositionSampleItem, Mode=TwoWay}" AlternationCount="2"
               IsSynchronizedWithCurrentItem="True">
@@ -17,7 +17,7 @@
                                 DisplayMemberBinding="{Binding Path=SampleType}"/>
                 <GridViewColumn Header="Metadata" 
                                 DisplayMemberBinding="{Binding Path=Metadata}"
-                                Width="150"/>
+                                Width="auto"/>
                 <GridViewColumn Header="ImageCount" 
                                 DisplayMemberBinding="{Binding Path=ImageCount}"/>
             </GridView>

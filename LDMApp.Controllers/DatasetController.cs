@@ -22,5 +22,12 @@ namespace LDMApp.Controllers
         {
             return await datasetApi.Get();
         }
+
+        [HttpGet("/create_dataset={id}")]
+        public async Task<string> Create(string id)
+        {
+            return await datasetApi.Create(id);
+        }
+
     }
 }

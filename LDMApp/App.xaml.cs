@@ -13,6 +13,10 @@ using Prism.Modularity;
 using LDMApp.Modules.MenuBar;
 using LDMApp.Modules.Samples;
 using LDMApp.Module.Images;
+using LDMApp.Dialogs;
+using LDMApp.Modules.DatasetImport.Views;
+using LDMApp.Modules.DatasetImport;
+using LDMApp.Modules.DatasetImport.ViewModels;
 
 namespace LDMApp
 {
@@ -37,6 +41,8 @@ namespace LDMApp
                 services.AddRefitClient<IImagesApi>()
                         .ConfigureHttpClient(c => c.BaseAddress = new Uri(ApiSettings.ImagesApiURL));
             });
+            containerRegistry.RegisterDialog<DatasetSelectDialog, DatasetSelectDialogViewModel>();
+            containerRegistry.RegisterDialog<DatasetImportDialog, DatasetImportDialogViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
@@ -44,6 +50,7 @@ namespace LDMApp
             moduleCatalog.AddModule<MenuBarModule>();
             moduleCatalog.AddModule<SamplesModule>();
             moduleCatalog.AddModule<ImagesModule>();
+            moduleCatalog.AddModule<DatasetImportModule>();
         }
     }
 }

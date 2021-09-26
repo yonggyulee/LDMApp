@@ -1,4 +1,6 @@
-﻿using Prism.Mvvm;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -33,9 +35,28 @@ namespace LDMApp.Core.Models
         //    set { SetProperty(ref _sampleType, value); }
         //}
 
-        //private string _metadata;
+        private string _metadata;
         [JsonPropertyName("metadata")]
-        public string Metadata { get; set; }
+        public string Metadata 
+        {
+            get 
+            {
+                string jsondata = _metadata;
+                try
+                {
+                    if(jsondata != null)
+                    {
+                        jsondata = JValue.Parse(_metadata).ToString(Formatting.Indented);
+                    }
+                }
+                catch (JsonReaderException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                return jsondata;
+            }
+            set { _metadata = value; } 
+        }
         //{
         //    get { return _metadata; }
         //    set { SetProperty(ref _metadata, value); }

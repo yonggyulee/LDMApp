@@ -1,10 +1,11 @@
-﻿using Prism.Mvvm;
+﻿using LDMApp.Core;
+using Prism.Mvvm;
 
 namespace LDMApp.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private string _title = "Prism Application";
+        private string _title = AppSettings.AppTitle;
         public string Title
         {
             get { return _title; }

@@ -1,7 +1,9 @@
 ﻿using LDMApp.Controllers;
+using LDMApp.Core.Events;
 using LDMApp.Core.Models;
 using LDMApp.Services.Interfaces;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -21,19 +23,23 @@ namespace LDMApp.Modules.Samples.ViewModels
             set { SetProperty(ref _sampleItems, value); } 
         }
 
-        private string _message;
-        public string Message
+        private string _currentDataset;
+
+        private DelegateCommand<ICollection<Image>> _changedCommand;
+        private Sample _currentPositionSampleItem;
+        private readonly IEventAggregator eventAggregator;
+
+        public DelegateCommand<ICollection<Image>> ChangedCommand
         {
-            get { return _message; }
-            set { SetProperty(ref _message, value); }
+            get { return _changedCommand; }
+            set { SetProperty(ref _changedCommand, value); }
         }
 
-        private Sample _currentPositionSampleItem;
-
-        public SamplesDataViewModel(ISamplesApi samplesApi)
+        public SamplesDataViewModel(ISamplesApi samplesApi, IEventAggregator eventAggregator)
         {
             samplesController = new SamplesController(samplesApi);
-            setData();
+            this.eventAggregator = eventAggregator;
+            eventAggregator.GetEvent<DatasetSelectedEvent>().Subscribe(setData, ThreadOption.UIThread);
             //getMsg();
         }
 
@@ -42,37 +48,27 @@ namespace LDMApp.Modules.Samples.ViewModels
             get { return _currentPositionSampleItem; }
             set
             {
-                SetProperty(ref _currentPositionSampleItem, value);
+                if(SetProperty(ref _currentPositionSampleItem, value))
+                {
+                    if(_currentPositionSampleItem != null)
+                    {
+                        IDictionary<string, object> dict = new Dictionary<string, object>();
+
+                        dict.Add("currentDataset", _currentDataset);
+                        dict.Add("images", CurrentPositionSampleItem.images);
+
+                        eventAggregator.GetEvent<SampleSelectedEvent>().Publish(dict);
+                    }
+                }
             }
         }
 
-        private async void setData()
+        private async void setData(string dataset_id)
         {
-            var result = await samplesController.GetList("dataset_1");
+            _currentDataset = dataset_id;
+            var result = await samplesController.GetList(dataset_id);
             SampleItems = new ObservableCollection<Sample>(result);
             CurrentPositionSampleItem = SampleItems.First();
-            int s_id = CurrentPositionSampleItem.SampleID;
-            string d_id = CurrentPositionSampleItem.DatasetID;
-            int s_type = CurrentPositionSampleItem.SampleType;
-            string md = CurrentPositionSampleItem.Metadata;
-        }
-
-
-        private Sample _sample;
-        public Sample Sample
-        {
-            get { return _sample; }
-            set { SetProperty(ref _sample, value); }
-        }
-
-        private ICollection<Sample> _samples { get; set; }
-
-        public async void getMsg()
-        {
-            _samples = await samplesController.GetList("dataset_1");
-            SampleItems = new ObservableCollection<Sample>(_samples);
-            Sample = SampleItems.First<Sample>();
-            Message = $"s_id : {Sample.SampleID}, d_id : {Sample.DatasetID}, s_type : {Sample.SampleType}, md : {Sample.Metadata}, ic : {Sample.ImageCount}, images : {Sample.images.First()}";
         }
     }
 }

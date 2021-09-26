@@ -4,27 +4,10 @@
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
     <UserControl.Resources>
-        <DataTemplate x:Key="imageDataTemplate">
-            <Border BorderThickness="1" Padding="5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0">
-                        
-                    </StackPanel>
-                    
-                </Grid>
-            </Border>
-        </DataTemplate>
+        <ResourceDictionary Source="../ImageItemResources.xaml"/>
     </UserControl.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Label Content="Images" Grid.Row="0"/>
-        
-    </Grid>
+    <ListBox Grid.Row="1"
+                 SelectedItem="{Binding CurrentPositionImageItem}"
+                 ItemsSource="{Binding ImageItems}"
+                 ItemTemplate="{StaticResource imageDataTemplate}"/>
 </UserControl>
